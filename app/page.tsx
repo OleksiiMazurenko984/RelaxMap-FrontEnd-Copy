@@ -1,11 +1,5 @@
-"use client";
-import LocationCard from "@/components/LocationCard/LocationCard";
+import Home from "@/components/Home/Home";
 
-export default function Home() {
-  return (
-    <main>
-      <h1>Welcome to RelaxMap</h1>
-      <LocationCard />
-    </main>
-  );
+export default function HomePage() {
+  return <Home />;
 }

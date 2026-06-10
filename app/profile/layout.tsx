@@ -1,6 +1,8 @@
+import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Montserrat } from 'next/font/google';
 import { classNames } from '@/lib/utils';
+import { Providers } from './Providers';
 import styles from './layout.module.css';
 
 const montserrat = Montserrat({
@@ -8,11 +10,16 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+export const metadata: Metadata = {
+  title: 'Профіль | RelaxMap',
+};
+
+export default function ProfileLayout({ children }: { children: ReactNode }) {
   return (
     <div className={classNames(montserrat.className, styles.Page)}>
-      <main className={styles.Main}>{children}</main>
-      <footer className={styles.Footer}>© 2026 Relax Map</footer>
+      <Providers>
+        <div className={styles.Container}>{children}</div>
+      </Providers>
     </div>
   );
 }
