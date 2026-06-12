@@ -70,7 +70,7 @@
     padding: 0 32px;
   }
   .container {
-    width: 644px;
+    max-width: 1100px;
     margin: 0;
   }
   .title {
@@ -92,7 +92,7 @@
     padding: 0 64px;
   }
   .container {
-    width: 1312px;
+    max-width: 1312px;
   }
   .title {
     font-size: 56px;
