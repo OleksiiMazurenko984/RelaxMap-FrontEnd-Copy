@@ -1,6 +1,9 @@
+import axios from "axios";
 import type { Location } from "@/types/profile";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
+const api = axios.create({ baseURL: API_URL });
 
 interface GetLocationsParams {
   page: number;
@@ -10,7 +13,6 @@ interface GetLocationsParams {
   locationType?: string;
   sort?: string;
 }
-
 interface LocationsResponse {
   page: number;
   limit: number;
@@ -18,14 +20,12 @@ interface LocationsResponse {
   totalPages: number;
   locations: Location[];
 }
-
 interface LocationType {
   _id: string;
   type: string;
   slug: string;
   shortDescription?: string;
 }
-
 interface Region {
   _id: string;
   region?: string;
@@ -33,27 +33,14 @@ interface Region {
   type?: string;
   slug: string;
 }
-
 export const getLocationTypes = async (): Promise<LocationType[]> => {
-  const response = await fetch(`${API_URL}/categories/location-types`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch location types");
-  }
-
-  return response.json();
+  const { data } = await api.get<LocationType[]>("/categories/location-types");
+  return data;
 };
-
 export const getRegions = async (): Promise<Region[]> => {
-  const response = await fetch(`${API_URL}/categories/regions`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch regions");
-  }
-
-  return response.json();
+  const { data } = await api.get<Region[]>("/categories/regions");
+  return data;
 };
-
 export const getLocations = async ({
   page,
   limit,
@@ -62,21 +49,15 @@ export const getLocations = async ({
   locationType,
   sort,
 }: GetLocationsParams): Promise<LocationsResponse> => {
-  const params = new URLSearchParams();
-
-  params.set("page", String(page));
-  params.set("limit", String(limit));
-
-  if (search) params.set("search", search);
-  if (region) params.set("region", region);
-  if (locationType) params.set("locationType", locationType);
-  if (sort) params.set("sort", sort);
-
-  const res = await fetch(`${API_URL}/locations?${params.toString()}`);
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch locations");
-  }
-
-  return res.json();
+  const { data } = await api.get<LocationsResponse>("/locations", {
+    params: {
+      page,
+      limit,
+      search: search || undefined,
+      region: region || undefined,
+      locationType: locationType || undefined,
+      sort: sort || undefined,
+    },
+  });
+  return data;
 };

@@ -13,6 +13,18 @@
   .locationCard {
     width: 100%;
   }
+
+  .statusMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 200px;
+    margin: 0;
+
+    text-align: center;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -29,6 +41,18 @@
 
   .locationCard {
     width: 340px;
+  }
+
+  .statusMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 200px;
+    margin: 0;
+
+    text-align: center;
   }
 }
 
