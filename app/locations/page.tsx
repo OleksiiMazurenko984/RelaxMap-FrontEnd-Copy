@@ -1,12 +1,12 @@
-import { LocationsPage } from "@/components/LocationsPage/LocationsPage";
+import { LocationsPage } from "@/components/locations/LocationsPage/LocationsPage";
 import css from "./page.module.css";
 
 export default function LocationsRoutePage() {
   return (
     <main className={css.page}>
-      <div className={css.container}>
+      <section className={css.container}>
         <LocationsPage />
-      </div>
+      </section>
     </main>
   );
 }

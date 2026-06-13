@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import "modern-normalize";
 import "./globals.css";
-import {Footer} from "@/components/Footer/Footer";
+import { Footer } from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "RelaxMap",
@@ -21,7 +22,7 @@ export default function RootLayout({
         <header>
           <Header />
         </header>
-        {children}
+        <QueryProvider>{children}</QueryProvider>
         <Toaster position="top-center" />
       </body>
     </html>
