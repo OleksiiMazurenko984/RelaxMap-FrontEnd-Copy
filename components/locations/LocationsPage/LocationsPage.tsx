@@ -131,14 +131,26 @@ export const LocationsPage = () => {
         onRegionChange={setRegion}
         onSortChange={setSort}
       />
-      <LocationsGrid
-        locations={locations}
-        locationTypeLabels={locationTypeLabels}
-        listRef={listRef}
-        hasNextPage={hasNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-        onLoadMore={handleLoadMore}
-      />
+      {isLoading && <p className={css.statusMessage}>Завантаження...</p>}
+
+      {isError && (
+        <p className={css.statusMessage}> Не вдалося завантажити локації </p>
+      )}
+
+      {!isLoading && !isError && locations.length === 0 && (
+        <p className={css.statusMessage}>Нічого не знайдено</p>
+      )}
+
+      {!isLoading && !isError && locations.length > 0 && (
+        <LocationsGrid
+          locations={locations}
+          locationTypeLabels={locationTypeLabels}
+          listRef={listRef}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          onLoadMore={handleLoadMore}
+        />
+      )}
     </>
   );
 };
