@@ -41,7 +41,7 @@ export function LocationCard({ location, editable = false }: LocationCardProps) 
 
           {editable && (
             <Link
-              href={`/locations/edit/${location._id}`}
+              href={`/locations/${location._id}/edit`}
               className={styles.EditButton}
               aria-label="Редагувати локацію"
             >
