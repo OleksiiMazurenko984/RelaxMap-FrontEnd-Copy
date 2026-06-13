@@ -4,6 +4,7 @@ import "modern-normalize";
 import "./globals.css";
 import { Footer } from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+import { ModalProvider } from "@/providers/modal-provider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
@@ -24,6 +25,8 @@ export default function RootLayout({
         </header>
         <QueryProvider>{children}</QueryProvider>
         <Toaster position="top-center" />
+        <ModalProvider />
+        <Footer />
       </body>
     </html>
   );

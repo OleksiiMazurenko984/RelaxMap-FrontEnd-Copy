@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import css from "./Profile.module.css";
 import { User } from "@/types";
