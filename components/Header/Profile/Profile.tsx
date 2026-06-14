@@ -5,13 +5,18 @@ import css from "./Profile.module.css";
 import { User } from "@/types";
 import { useLogout } from "@/hooks/useLogout";
 import formatUserName from "@/utils/getShortUsernameHeader";
+import { useRouter } from "next/navigation";
 
 interface ProfileProps {
   user: User | null;
 }
 
 export default function Profile({ user }: ProfileProps) {
-  const handleLogout = useLogout();
+  const router = useRouter();
+
+  const handleModalLogout = () => {
+    router.push("/confirmation");
+  };
 
   return (
     <div className={css.profileWrapper}>
@@ -24,7 +29,7 @@ export default function Profile({ user }: ProfileProps) {
       />
       <p className={css.profileName}>{formatUserName(user?.name)}</p>
       <span className={css.profileBorder}></span>
-      <button className={css.profileLogoutButton} onClick={handleLogout}>
+      <button className={css.profileLogoutButton} onClick={handleModalLogout}>
         <svg className={css.profileLogoutIcon}>
           <use className={css.profileIcon} href="/sprite.svg#logout" />
         </svg>
