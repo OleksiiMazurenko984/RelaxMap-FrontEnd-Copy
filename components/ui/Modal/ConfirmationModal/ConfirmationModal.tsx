@@ -32,7 +32,9 @@ const ConfirmationModal = ({
     try {
       setIsLoading(true);
 
-      await onConfirm();
+      if (onConfirm) {
+        await onConfirm();
+      }
 
       router.back();
     } catch (error) {
