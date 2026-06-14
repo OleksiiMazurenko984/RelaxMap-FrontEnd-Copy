@@ -19,15 +19,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header>
-          <Header />
-        </header>
-        {children}
-        {modal}
-        <QueryProvider>{children}</QueryProvider>
-        <Toaster position="top-center" />
-        <ModalProvider />
-        <Footer />
+        <QueryProvider>
+          <header>
+            <Header />
+          </header>
+          <main>
+            {children}
+          </main>
+          <Footer />
+          <ModalProvider />
+          {modal}
+          <Toaster position="top-center" />
+        </QueryProvider>
       </body>
     </html>
   );
