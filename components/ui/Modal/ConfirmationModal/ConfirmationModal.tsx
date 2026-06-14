@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import Modal from "../Modal";
 
 interface ConfirmationModalProps {
-  title: string;
-  confirmButtonText: string;
-  cancelButtonText: string;
-  onConfirm: () => Promise<void> | void;
+  title?: string;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
+  onConfirm?: () => Promise<void> | void;
   onCancel?: () => void;
 }
 
