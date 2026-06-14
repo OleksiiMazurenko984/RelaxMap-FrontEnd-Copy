@@ -16,7 +16,7 @@ export default function NavList({ isAuth }: NavListProps) {
       </li>
       {isAuth && (
         <li className={css.navItem}>
-          <Link href="/pro">Мій Профіль</Link>
+          <Link href="/profile">Мій Профіль</Link>
         </li>
       )}
     </ul>

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import css from "./Profile.module.css";
 import { User } from "@/types";
+import { useLogout } from "@/hooks/useLogout";
+import formatUserName from "@/utils/getShortUsernameHeader";
 import { useRouter } from "next/navigation";
 
 interface ProfileProps {
@@ -25,7 +27,7 @@ export default function Profile({ user }: ProfileProps) {
         width={32}
         height={32}
       />
-      <p className={css.profileName}>{user?.name || "Імʼя"}</p>
+      <p className={css.profileName}>{formatUserName(user?.name)}</p>
       <span className={css.profileBorder}></span>
       <button className={css.profileLogoutButton} onClick={handleModalLogout}>
         <svg className={css.profileLogoutIcon}>

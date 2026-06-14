@@ -16,7 +16,11 @@ export default function AuthNav({ isAuth }: AuthNavProps) {
             </AppLink>
           </li>
           <li>
-            <AppLink href="/signup" variant="primary" className={css.authLink}>
+            <AppLink
+              href="/register"
+              variant="primary"
+              className={css.authLink}
+            >
               Реєстрація
             </AppLink>
           </li>
