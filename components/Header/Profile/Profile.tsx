@@ -3,15 +3,15 @@
 import Image from "next/image";
 import css from "./Profile.module.css";
 import { User } from "@/types";
-import { useLogout } from "@/hooks/useLogout";
 import formatUserName from "@/utils/getShortUsernameHeader";
 import { useRouter } from "next/navigation";
 
 interface ProfileProps {
   user: User | null;
+  onNavigate?: () => void;
 }
 
-export default function Profile({ user }: ProfileProps) {
+export default function Profile({ user, onNavigate }: ProfileProps) {
   const router = useRouter();
 
   const handleModalLogout = () => {
@@ -29,7 +29,13 @@ export default function Profile({ user }: ProfileProps) {
       />
       <p className={css.profileName}>{formatUserName(user?.name)}</p>
       <span className={css.profileBorder}></span>
-      <button className={css.profileLogoutButton} onClick={handleModalLogout}>
+      <button
+        className={css.profileLogoutButton}
+        onClick={() => {
+          handleModalLogout();
+          onNavigate?.();
+        }}
+      >
         <svg className={css.profileLogoutIcon}>
           <use className={css.profileIcon} href="/sprite.svg#logout" />
         </svg>
