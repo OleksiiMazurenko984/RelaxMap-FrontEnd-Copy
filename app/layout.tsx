@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import "modern-normalize";
+import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { Footer } from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
@@ -23,10 +23,10 @@ export default function RootLayout({
           <header>
             <Header />
           </header>
-          <main>
-            {children}
-          </main>
-          <Footer />
+          <main>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
           <ModalProvider />
           {modal}
           <Toaster position="top-center" />
@@ -35,3 +35,4 @@ export default function RootLayout({
     </html>
   );
 }
+
