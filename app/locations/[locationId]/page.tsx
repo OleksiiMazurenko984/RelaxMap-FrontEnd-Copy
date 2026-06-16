@@ -1,12 +1,16 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+
+import { useAuthStore } from "@/store";
+import { useModal } from "@/hooks/use-modal-store";
 
 import { getLocationDetailsById } from "@/lib/locationsApi";
 import { getFeedbacksByLocationId } from "@/lib/feedbacksApi";
 
 import type { LocationDetails } from "@/types/location";
+import { Loader } from "@/components/ui/Loader/Loader";
 
 import { LocationGallery } from "@/components/LocationDetails/LocationGallery/LocationGallery";
 import { LocationInfoBlock } from "@/components/LocationDetails/LocationInfoBlock/LocationInfoBlock";
@@ -19,6 +23,9 @@ const PER_PAGE = 10;
 
 export default function LocationDetailsPage() {
   const { locationId } = useParams<{ locationId: string }>();
+  const router = useRouter();
+  const { onOpen } = useModal();
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
 
   const locationQuery = useQuery<LocationDetails>({
     queryKey: ["location", locationId],
@@ -38,7 +45,7 @@ export default function LocationDetailsPage() {
   });
 
   if (locationQuery.isLoading || feedbacksQuery.isLoading) {
-    return <p className={css.State}>Завантаження…</p>;
+    return <Loader fullScreen size="lg" variant="primary" />;
   }
 
   if (locationQuery.isError || feedbacksQuery.isError || !locationQuery.data) {
@@ -62,6 +69,23 @@ export default function LocationDetailsPage() {
       </section>
 
       <section className={css.ReviewsSection}>
+        <div className={css.ReviewsHeader}>
+          <h2 className={css.ReviewsTitle}>Відгуки</h2>
+          <button
+            type="button"
+            className={css.SubmitReviewBtn}
+            onClick={() => {
+              if (isLoggedIn) {
+                router.push(`/locations/${locationId}/feedback`);
+              } else {
+                onOpen("AuthPromptModal");
+              }
+            }}
+          >
+            Залишити відгук
+          </button>
+        </div>
+
         <ReviewsBlock locationId={locationId} feedbacks={feedbacks} />
       </section>
     </div>
